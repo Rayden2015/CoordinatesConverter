@@ -33806,7 +33806,6 @@ for (let i = 0; i < agency_points.length; i++ ){
     //parse_gps(agency_points[i]["GPS COORDINATES"]);
     console.log(agency_points[i]);
     console.log('counter is ', i);
-    i++;
 }
 
 
@@ -33817,7 +33816,6 @@ for (let i = 0; i < agency_points.length; i++ ){
 require('fs').writeFile(
 
     './AgencyGPS.json',
-
     JSON.stringify(agency_points),
 
     function (err) {
