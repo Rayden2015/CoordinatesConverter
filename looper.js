@@ -33801,11 +33801,39 @@ var agency_points = [
 
 
 for (let i = 0; i < agency_points.length; i++ ){
+    //merge the location and address
+    agency_points[i]["location"] = agency_points[i]['ADDRESS'] + ' ' + agency_points[i]['Location'];
+
+    //rename business name to just name
+    agency_points[i]["name"]= agency_points[i]['AGENT BUSINESS NAME'];
+
+    //adding the type
+    agency_points[i]['type'] = 'all'
+
     console.log('Old coordinate is ', agency_points[i]["GPS COORDINATES"]);
-    agency_points[i]['Transformed'] = parse_gps(agency_points[i]['GPS COORDINATES']);
-    //parse_gps(agency_points[i]["GPS COORDINATES"]);
+    var transformed_coordinate = parse_gps(agency_points[i]['GPS COORDINATES']);
+    console.log('transformed_coordinate: ', transformed_coordinate);
+   
+    //Splitting the coordinates into lat and long
+    var split_coordinates = transformed_coordinate.toString().split(',');
+    console.log('split_coordinates', split_coordinates);
+    agency_points[i]['lat'] = split_coordinates[0];
+    agency_points[i]['long'] = split_coordinates[1];
+
+    //deleting unneded fields 
+    delete agency_points[i]['Lat'];
+    delete agency_points[i]['Lng'];
+    delete agency_points[i]['ADDRESS'];
+    delete agency_points[i]['Location'];
+    delete agency_points[i]['AGENT USERNAME'];
+    delete agency_points[i]['GPS COORDINATES'];
+    delete agency_points[i]['AGENT BUSINESS NAME'];
+    delete agency_points[i]['Location'];
+
+
     console.log(agency_points[i]);
     console.log('counter is ', i);
+
 }
 
 
